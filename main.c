@@ -21,7 +21,12 @@ int main(){
 	
 	int opcAdmin=0;
 	int opcCliente=0;
+	int opcAnCl=0;
 	int opc = 0;
+	Cliente *cl;
+	char str[20];
+
+
 
 	do{
 		opc = menuLogin();
@@ -32,9 +37,23 @@ int main(){
 					break;
 			case 2: opcCliente = menuCliente();
 					break;
+			case 3: cl = (Cliente*) malloc (sizeof(Cliente));
+					printf("Nombre de usuario: ");
+						fgets(str, 20, stdin);
+						clear_if_needed(str); 
+						sscanf(str, "%s", cl->usuario);
+					printf("Password: ");
+						fgets(str, 20, stdin);
+						clear_if_needed(str); 
+						sscanf(str, "%s", cl->password);
+					writeCl(cl);
+					free(cl);
+					cl=0;
+					main();
+					break;
 			default: error(); break;
 		}
-	} while((opc < 1) || (opc > 2));
+	} while((opc < 1) || (opc > 3));
 
 
 	if(opcAdmin != 0){
@@ -42,15 +61,18 @@ int main(){
 				switch(opcAdmin){
 
 					case 1: anyadirLibro();
-						break;
-					case 2: 
-						break;
-					case 3: 
-						break;
+							opcAdmin = menuAdmin();
+							break;
+					case 2: opcAdmin = menuAdmin();
+							break;
+					case 3: readCl();
+							opcAdmin = menuAdmin();
+							break;
 					case 4: break; //salimos de la aplicacion
 					default: error();
 				}
-		} while((opcAdmin < 1) || (opcAdmin > 4));
+		
+		} while((opcAdmin > 1) && (opcAdmin < 4));
 	}
 
 	if(opcCliente != 0){
@@ -58,20 +80,19 @@ int main(){
 				switch(opcCliente){
 
 					case 1: menuComprarLibro();
-						break;
-					case 2: 
-						break;
-					case 3:
-						break;
-					case 4: 
-						break;
-					case 5: 
-						break;
+							opcCliente = menuCliente();
+							break;
+					case 2: opcCliente = menuCliente();
+							break;
+					case 3:	opcCliente = menuCliente();
+							break;
+					case 4: opcCliente = menuCliente();
+							break;
+					case 5: opcCliente = menuCliente();
+							break;
 					case 6: break; //salimos de la aplicacion
 					default: error();
 				}
-		} while((opcCliente < 1) || (opcCliente > 6));
+		} while((opcCliente > 1) && (opcCliente < 6));
 	}
-
-	return 0;
 }

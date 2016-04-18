@@ -12,6 +12,11 @@ typedef struct{
 	char editorial[20];
 }Libro;
 
+typedef struct{
+	char usuario[20];
+	char password[20];
+}Cliente;
+
 int menuLogin();
 void error();
 int menuAdmin();
@@ -21,6 +26,7 @@ void menuComprarLibro();
 void anyadirLibro ();
 void writeLib(Libro* lib);
 void readLib();
+void writeCl(Cliente* cl);
 
 
 #endif
