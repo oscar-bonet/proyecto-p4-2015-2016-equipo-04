@@ -10,7 +10,7 @@
 	y devuelve el número de la opción seleccionada.
 */
 int menuLogin(){
-	
+
 	char str[2];
 	int num;
 
@@ -19,9 +19,9 @@ int menuLogin(){
 		printf("\t2. Cliente\n");
 		printf("\t3. Nuevo cliente\n");
 		printf("Seleccione una opcion: ");
-		
+
 		fgets(str, 2, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 
 		sscanf(str, "%d", &num);
 		printf("\n");
@@ -42,7 +42,7 @@ void error(){
 	y devuelve el número de la opción seleccionada.
 */
 int menuAdmin(){
-	
+
 	char str[2];
 	int num;
 
@@ -52,9 +52,9 @@ int menuAdmin(){
 	printf("\t3. Ver lista de clientes\n");
 	printf("\t4. Salir\n");
 	printf("Seleccione una opcion: ");
-		
+
 	fgets(str, 2, stdin);
-	clear_if_needed(str); 
+	clear_if_needed(str);
 
 	sscanf(str, "%d", &num);
 	printf("\n");
@@ -68,7 +68,7 @@ int menuAdmin(){
 	y devuelve el número de la opción seleccionada.
 */
 int menuCliente(){
-	
+
 	char str[2];
 	int num;
 
@@ -80,9 +80,9 @@ int menuCliente(){
 	printf("\t5. Agregar fondos a la cuenta\n");
 	printf("\t6. Salir\n");
 	printf("Seleccione una opcion: ");
-		
+
 	fgets(str, 2, stdin);
-	clear_if_needed(str); 
+	clear_if_needed(str);
 
 	sscanf(str, "%d", &num);
 	printf("\n");
@@ -96,7 +96,7 @@ int menuCliente(){
 	libro y devuelve el número de la opción seleccionada.
 */
 void menuComprarLibro(){
-	
+
 	char str[2];
 	int num;
 
@@ -108,7 +108,7 @@ void menuComprarLibro(){
 	printf("Seleccione una opcion: ");
 
 	fgets(str, 2, stdin);
-	clear_if_needed(str); 
+	clear_if_needed(str);
 	sscanf(str, "%d", &num);
 
 	switch(num){
@@ -120,7 +120,7 @@ void menuComprarLibro(){
 		case 3: menuComprarLibro();
 				break;
 		case 4: menuCliente(); //volvemos al anterior menu
-				break; 
+				break;
 		default: error();
 	}
 
@@ -136,51 +136,51 @@ void menuComprarLibro(){
 void anyadirLibro (){
 
 	Libro *lib;
-	char str[20];
+	char str[50];
 
 	lib = (Libro*) malloc (sizeof(Libro));
 
 	printf("\nANYADIR LIBRO:\n");
-	
+
 	printf("\tISBN: ");
 		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->isbn);
 
 	printf("\tTitulo: ");
-		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		fgets(str, 50, stdin);
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->titulo);
 
 
 	printf("\tAutor: ");
-		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		fgets(str, 50, stdin);
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->autor);
 
 	printf("\tGenero: ");
 		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->genero);
 
 	printf("\tPrecio: ");
 		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->precio);
-	
+
 	printf("\tDescripcion: ");
-		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		fgets(str, 50, stdin);
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->desc);
 
 	printf("\tAnyo: ");
 		fgets(str, 5, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->anyo);
-	
+
 	printf("\tEditorial: ");
 		fgets(str, 20, stdin);
-		clear_if_needed(str); 
+		clear_if_needed(str);
 		sscanf(str, "%s", lib->editorial);
 
 	printf("\nLibro anyadido: \n");
@@ -204,12 +204,12 @@ void anyadirLibro (){
 	y lo almacena en el fichero 'libros.txt'.
 */
 void writeLib(Libro* lib){
-	
+
 	FILE* f;
-        int c;
+    int c;
 
 	f = fopen("libros.txt", "a");
-       
+
 	fprintf(f, "0%s\n", lib->isbn);
 	fprintf(f, "%s\n", lib->titulo);
 	fprintf(f, "%s\n", lib->autor);
@@ -228,14 +228,14 @@ void writeLib(Libro* lib){
 	Esta funcion saca por pantalla los libros que hay en la tienda (almacenados en 'libros.txt').
 */
 void readLib(){
-	
+
 	FILE* f;
         char c;
         char leer[50];
 
 	//abrir fichero para lectura
-	f = fopen("libros.txt", "r"); 
-       
+	f = fopen("libros.txt", "r");
+
     if (f==NULL){
     	printf("Error al abrir el fichero\n");
 
@@ -265,7 +265,7 @@ void readLib(){
 			//putchar(c); //escribir el caracter en la linea de comandos
 		}
 	}
-	
+
 	//cerrar fichero
 	fclose(f);
 }
@@ -274,17 +274,17 @@ void readLib(){
 
 	FILE* f;
         char c;
-        
+
         int i, x;
         int num_lines=0;
 
 	//abrir fichero para lectura
 	f = fopen("libros.txt", "r");
-   
+
 	while ((c = fgetc(f)) != EOF) //leemos caracter a caracter y escribirlo; y además, contar el numero de lineas
 	{
 		if (c == '\n')
-			num_lines++;  
+			num_lines++;
 	}
 
 	int li = (num_lines/varLib);
@@ -292,7 +292,7 @@ void readLib(){
 	char libro[li][varLib];
 
   	for(x = 0; x < li; x++){
-	   for(i = 0; i < varLib; i++){    
+	   for(i = 0; i < varLib; i++){
 			fscanf(f, " %s", libro[x][i]);
 		}
 	}
@@ -316,12 +316,12 @@ void readLib(){
 	*/
 
 void writeCl(Cliente* cl){
-	
+
 	FILE* f;
         int c;
 
 	f = fopen("clientes.txt", "a");
-       
+
 	fprintf(f, "0%s\n", cl->usuario);
 	fprintf(f, "%s\n", cl->password);
 
@@ -331,14 +331,14 @@ void writeCl(Cliente* cl){
 
 
 void readCl(){
-	
+
 	FILE* f;
         char c;
         char leer[50];
 
 	//abrir fichero para lectura
-	f = fopen("clientes.txt", "r"); 
-       
+	f = fopen("clientes.txt", "r");
+
     if (f==NULL){
     	printf("Error al abrir el fichero\n");
 
@@ -355,7 +355,7 @@ void readCl(){
 			//putchar(c); //escribir el caracter en la linea de comandos
 		}
 	}
-	
+
 	//cerrar fichero
 	fclose(f);
 }

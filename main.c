@@ -9,7 +9,7 @@
 void clear_if_needed(char *str){
 	if (str[strlen(str) - 1] != '\n')
 	{
-		int c;    
+		int c;
     	while ( (c = getchar()) != EOF && c != '\n');
     }
 }
@@ -18,7 +18,7 @@ void clear_if_needed(char *str){
 /**********************************MENU PRINCIPAL**********************************/
 
 int main(){
-	
+
 	int opcAdmin=0;
 	int opcCliente=0;
 	int opcAnCl=0;
@@ -40,11 +40,11 @@ int main(){
 			case 3: cl = (Cliente*) malloc (sizeof(Cliente));
 					printf("Nombre de usuario: ");
 						fgets(str, 20, stdin);
-						clear_if_needed(str); 
+						clear_if_needed(str);
 						sscanf(str, "%s", cl->usuario);
 					printf("Password: ");
 						fgets(str, 20, stdin);
-						clear_if_needed(str); 
+						clear_if_needed(str);
 						sscanf(str, "%s", cl->password);
 					writeCl(cl);
 					free(cl);
@@ -53,7 +53,7 @@ int main(){
 					break;
 			default: error(); break;
 		}
-	} while((opc < 1) || (opc > 3));
+	} while((opc < 0) && (opc > 4));
 
 
 	if(opcAdmin != 0){
@@ -71,8 +71,8 @@ int main(){
 					case 4: break; //salimos de la aplicacion
 					default: error();
 				}
-		
-		} while((opcAdmin > 1) && (opcAdmin < 4));
+
+		} while((opcAdmin > 0) && (opcAdmin < 4));
 	}
 
 	if(opcCliente != 0){
@@ -93,6 +93,6 @@ int main(){
 					case 6: break; //salimos de la aplicacion
 					default: error();
 				}
-		} while((opcCliente > 1) && (opcCliente < 6));
+		} while((opcCliente > 0) && (opcCliente < 6));
 	}
 }
