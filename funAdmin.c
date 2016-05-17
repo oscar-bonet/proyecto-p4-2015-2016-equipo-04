@@ -54,23 +54,23 @@ void anyadirLibro (){
 	printf("\tISBN: ");
 		fgets(str, 20, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->isbn);
+		sscanf(str,"%[^\n]", lib->isbn);
 
 	printf("\tTitulo: ");
 		fgets(str, 50, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->titulo);
+		sscanf(str, "%[^\n]", lib->titulo);
 
 
 	printf("\tAutor: ");
 		fgets(str, 50, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->autor);
+		sscanf(str, "%[^\n]", lib->autor);
 
 	printf("\tGenero: ");
 		fgets(str, 20, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->genero);
+		sscanf(str, "%[^\n]", lib->genero);
 
 	printf("\tPrecio: ");
 		fgets(str, 20, stdin);
@@ -80,7 +80,7 @@ void anyadirLibro (){
 	printf("\tDescripcion: ");
 		fgets(str, 50, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->desc);
+		sscanf(str, "%[^\n]", lib->desc);
 
 	printf("\tAnyo: ");
 		fgets(str, 5, stdin);
@@ -90,7 +90,7 @@ void anyadirLibro (){
 	printf("\tEditorial: ");
 		fgets(str, 20, stdin);
 		clear_if_needed(str);
-		sscanf(str, "%s", lib->editorial);
+		sscanf(str,"%[^\n]", lib->editorial);
 
 	printf("\nLibro anyadido: \n");
 		printf("\tISBN: %s\n", lib->isbn);
