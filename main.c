@@ -39,6 +39,8 @@ int main(int argc, char *argv[]){
 
 	//LOGIN COMO ADMIN
 	if((argc == 2) && (strcmp(argv[1], "admin") == 0)){
+		opcAdmin=menuAdmin();
+
 		do{
 			switch(opcAdmin){
 
@@ -57,6 +59,12 @@ int main(int argc, char *argv[]){
 		} while((opcAdmin > 0) && (opcAdmin < 4));
 		
 
+		
+	}
+
+	//LOGIN COMO CLIENTE
+	if(argc == 1){
+		opcCliente=menuCliente();
 		if(opcCliente != 0){
 			do{
 				switch(opcCliente){
@@ -77,13 +85,11 @@ int main(int argc, char *argv[]){
 				}
 			} while((opcCliente > 0) && (opcCliente < 6));
 		}
-	}
-
-	//LOGIN COMO CLIENTE
-	if(argc == 1){
 		
 	}
 }
+
+
 /*
 do{
 			opc = menuLogin();
