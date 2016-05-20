@@ -17,6 +17,8 @@ typedef struct{
 	char password[20];
 }Cliente;
 
+void clear_if_needed(char *str);
+
 void error();
 
 void readLib();

@@ -5,19 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-/**
-	Esta funcion elimina los caracteres pendientes si es necesario.
-	Se usa junto con fgets para leer la entrada hasta cierta longitud.
-*/
-void clear_if_needed(char *str){
-	if (str[strlen(str) - 1] != '\n')
-	{
-		int c;
-    	while ( (c = getchar()) != EOF && c != '\n');
-    }
-}
-
-
 /**********************************MENU PRINCIPAL**********************************/
 
 int main(int argc, char *argv[]){
