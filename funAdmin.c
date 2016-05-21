@@ -106,13 +106,16 @@ void anyadirLibro (){
 	free(lib);
 	lib = 0;
 }
+
+
+
 void writeLib(Libro* lib){
 	FILE* f;
     int c;
 
 	f = fopen("libros.txt", "a");
 
-	fprintf(f, "0%s\n", lib->isbn);
+	fprintf(f, "%s\n", lib->isbn);
 	fprintf(f, "%s\n", lib->titulo);
 	fprintf(f, "%s\n", lib->autor);
 	fprintf(f, "%s\n", lib->genero);

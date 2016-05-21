@@ -1,32 +1,32 @@
-0123456
-La_caida_de_los_gigantes
-Ken_Follet
+123456
+La caida de los gigantes
+Ken Follet
 historica
 29
-primera_guerra_mundial
+primera guerra mundial
 2013
-plaza_janes
-0987654
-estacion_de_tormentas
-andrezj_sapkowski
+plaza janes
+987654
+estacion de tormentas
+andrezj sapkowski
 fantasia
 23.95
-precuela_geralt_de_rivia
+precuela geralt de rivia
 2015
 alamut
-05432167
-el_ultimo_deseo
-andrezj_sapkowski
+5432167
+el ultimo deseo
+andrezj sapkowski
 fantasia
 27
-aventuras_de_geralt_de_rivia
+aventuras de geralt de rivia
 1994
 alamut
-078654323
-la_colmena
-camilo_jose_cela
+78654323
+la colmena
+camilo jose cela
 novela
 9.99
-vision_de_madrid_de_los_anyos_40
+vision de madrid de los anyos 40
 1955
 catedra

@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*
 int menuLogin(){
 	char str[2];
 	int num;
@@ -22,7 +23,7 @@ int menuLogin(){
 
 	return num;
 }
-
+*/
 int menuCliente(){
 	char str[2];
 	int num;
