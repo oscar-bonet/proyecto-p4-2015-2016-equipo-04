@@ -4,15 +4,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-/*
 int menuLogin(){
 	char str[2];
 	int num;
 
-		printf("\nLOGIN:\n");
-		printf("\t1. Administrador\n");
-		printf("\t2. Cliente\n");
-		printf("\t3. Nuevo cliente\n");
+		printf("\nLOGIN CLIENTE:\n");
+		printf("\t1. Cliente\n");
+		printf("\t2. Nuevo cliente\n");
 		printf("Seleccione una opcion: ");
 
 		fgets(str, 2, stdin);
@@ -23,7 +21,8 @@ int menuLogin(){
 
 	return num;
 }
-*/
+
+
 int menuCliente(){
 	char str[2];
 	int num;
@@ -45,6 +44,8 @@ int menuCliente(){
 
 	return num;
 }
+
+
 void menuComprarLibro(){
 	char str[2];
 	int num;
@@ -83,9 +84,54 @@ void writeCl(Cliente* cl){
 
 	f = fopen("clientes.txt", "a");
 
-	fprintf(f, "0%s\n", cl->usuario);
+	fprintf(f, "%s\n", cl->usuario);
 	fprintf(f, "%s\n", cl->password);
 
 	//cerrar fichero
 	fclose(f);
+}
+
+int comparacion (Cliente* cl){
+	FILE* f;
+    char c;
+    char leer[50];
+	char linea[100];
+	int counter =1;
+	int comp = 0;
+	int aux = 0;
+
+	//abrir fichero para lectura
+	f = fopen("clientes.txt", "r");
+
+    if (f==NULL){
+    	printf("Error al abrir el fichero\n");
+
+    }else{
+
+		while (fgets(linea, 50, f)) {
+		
+		clear_if_needed(linea);
+		
+		if (counter % 2 != 0){
+			sscanf(linea, "%[^\n]", &leer);
+			if (strcmp(leer, cl->usuario) == 0)
+				aux = 1;
+		}
+
+		if (aux==1){
+			counter++;
+			if (counter % 2 == 0){
+				sscanf(linea, "%[^\n]", &leer);
+				if (strcmp(leer, cl->password) == 0)
+					comp = 1;
+			}
+		}
+		counter++;
+		}
+	}
+
+	//cerrar fichero
+	fclose(f);
+
+	return comp;
 }

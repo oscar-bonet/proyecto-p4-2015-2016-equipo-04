@@ -58,7 +58,7 @@ void readLib(){
 			printf("%s %s\n",datos[cont],leer);
 
 			if (counter % 8 == 0){
-				printf("\n", counter-1);
+				printf("\n");
 				cont=-1;
 			}
 			counter++;

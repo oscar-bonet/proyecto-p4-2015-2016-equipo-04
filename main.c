@@ -26,6 +26,7 @@ int main(int argc, char *argv[]){
 
 	//LOGIN COMO ADMIN
 	if((argc == 2) && (strcmp(argv[1], "admin") == 0)){
+		
 		opcAdmin=menuAdmin();
 
 		do{
@@ -44,13 +45,64 @@ int main(int argc, char *argv[]){
 			}
 
 		} while((opcAdmin > 0) && (opcAdmin < 4));
-		
-
-		
 	}
 
 	//LOGIN COMO CLIENTE
 	if(argc == 1){
+		char usu[20];
+		char pass[20];
+		Cliente *aux;
+		int log = menuLogin();
+		int existe = 0;
+		
+		if (log == 1){ //cliente ya hecho
+
+			do{
+				printf("Usuario: ");
+					fgets(str, 20, stdin);
+					clear_if_needed(str);
+					sscanf(str, "%s", aux->usuario);
+
+				printf("Password: ");
+					fgets(str, 2, stdin);
+					clear_if_needed(str);
+					sscanf(str, "%s", aux->password);
+
+				existe = comparacion(aux);	
+
+				if (existe == 1){
+					printf("Log in correcto.\n");
+				}else{
+					printf("Usuario y/o contrasenya incorrectos.\n");
+				}
+
+			} while (existe != 1);
+		}
+
+		if (log == 2){ //crear cliente
+			
+			do{
+				printf("Nuevo usuario: ");
+					fgets(str, 20, stdin);
+					clear_if_needed(str);
+					sscanf(str, "%s", aux->usuario);
+
+				printf("Password: ");
+					fgets(str, 2, stdin);
+					clear_if_needed(str);
+					sscanf(str, "%s", aux->password);
+
+				existe = comparacion(aux);	
+
+				if (existe == 1){
+					writeCl(aux);
+					printf("Usuario creado correctamente.\n");
+				}
+
+			}while (existe != 1);
+		}
+
+		
 		opcCliente=menuCliente();
 		if(opcCliente != 0){
 			do{

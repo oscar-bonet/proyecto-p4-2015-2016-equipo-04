@@ -133,6 +133,8 @@ void readCl(){
 	FILE* f;
         char c;
         char leer[50];
+	char linea[100];
+	int counter =1;
 
 	//abrir fichero para lectura
 	f = fopen("clientes.txt", "r");
@@ -141,16 +143,16 @@ void readCl(){
     	printf("Error al abrir el fichero\n");
 
     }else{
-		//leer mientras no se llegue al final del fichero EOF (leer cualquier archivo de texto)
-		//while ((c = fgetc(f)) != EOF){ //leemos caracter a caracter y escribirlo.
-    	while ((c = fgetc(f)) != EOF) {
 
-			fscanf(f, "%s\n", &leer);
-			printf("Usuario: %s\n", leer);
-			fscanf(f, "%s\n", &leer);
-			//fscanf(f, " %[^\n]", &leer); -----> ES ESTA LA QUE HACE QUE SE SALTE UNA LÍNEA, PERO SI SE DEJA ASÍ, AÑADE UN LIBRO MÁS.****************
-
-			//putchar(c); //escribir el caracter en la linea de comandos
+		while (fgets(linea, 50, f)) {
+		
+		clear_if_needed(linea);
+		
+		if (counter % 2 != 0){
+			sscanf(linea, "%[^\n]", &leer);
+			printf("Usuario: %s\n",leer);
+		}
+		counter++;
 		}
 	}
 
