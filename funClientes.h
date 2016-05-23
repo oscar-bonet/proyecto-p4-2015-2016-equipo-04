@@ -9,7 +9,6 @@ int menuCliente();
 void menuComprarLibro();
 
 void writeCl(Cliente* cl);
-int comparacion(Cliente* cl);
-
+int comparacion(Cliente* cl, int opc);
 
 #endif

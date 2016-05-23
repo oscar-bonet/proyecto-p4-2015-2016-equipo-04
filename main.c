@@ -49,26 +49,26 @@ int main(int argc, char *argv[]){
 
 	//LOGIN COMO CLIENTE
 	if(argc == 1){
-		char usu[20];
-		char pass[20];
-		Cliente *aux;
+
 		int log = menuLogin();
-		int existe = 0;
+		int existe = 1;
 		
 		if (log == 1){ //cliente ya hecho
 
 			do{
+				cl = (Cliente*) malloc (sizeof(Cliente));
+
 				printf("Usuario: ");
 					fgets(str, 20, stdin);
 					clear_if_needed(str);
-					sscanf(str, "%s", aux->usuario);
+					sscanf(str, "%s", cl->usuario);
 
 				printf("Password: ");
-					fgets(str, 2, stdin);
+					fgets(str, 20, stdin);
 					clear_if_needed(str);
-					sscanf(str, "%s", aux->password);
+					sscanf(str, "%s", cl->password);
 
-				existe = comparacion(aux);	
+				existe = comparacion(cl, 1);	
 
 				if (existe == 1){
 					printf("Log in correcto.\n");
@@ -76,30 +76,43 @@ int main(int argc, char *argv[]){
 					printf("Usuario y/o contrasenya incorrectos.\n");
 				}
 
-			} while (existe != 1);
+			} while (existe == 0);
+
+			free (cl);
+			cl = 0;
 		}
 
 		if (log == 2){ //crear cliente
+
+			cl = (Cliente*) malloc (sizeof(Cliente));
 			
 			do{
-				printf("Nuevo usuario: ");
+				printf("NUEVO CLIENTE: \n");
+				printf("\tUsuario: ");
 					fgets(str, 20, stdin);
 					clear_if_needed(str);
-					sscanf(str, "%s", aux->usuario);
+					sscanf(str, "%s", cl->usuario);
 
-				printf("Password: ");
-					fgets(str, 2, stdin);
+				printf("\tPassword: ");
+					fgets(str, 20, stdin);
 					clear_if_needed(str);
-					sscanf(str, "%s", aux->password);
-
-				existe = comparacion(aux);	
+					sscanf(str, "%s", cl->password);
+				
+				existe = comparacion(cl, 2);	
 
 				if (existe == 1){
-					writeCl(aux);
+					printf("El usuario ya existe, por favor, cambia el nombre del usuario.\n");
+				}
+
+				if (existe == 0){
+					writeCl(cl);
 					printf("Usuario creado correctamente.\n");
 				}
 
-			}while (existe != 1);
+			}while (existe == 1);
+
+			free (cl);
+			cl = 0;
 		}
 
 		

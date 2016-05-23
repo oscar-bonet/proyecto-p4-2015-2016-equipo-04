@@ -91,12 +91,12 @@ void writeCl(Cliente* cl){
 	fclose(f);
 }
 
-int comparacion (Cliente* cl){
+int comparacion (Cliente* cl, int opc){
 	FILE* f;
     char c;
-    char leer[50];
-	char linea[100];
-	int counter =1;
+    char leer[20];
+	char linea[50];
+	int counter = 1;
 	int comp = 0;
 	int aux = 0;
 
@@ -107,31 +107,39 @@ int comparacion (Cliente* cl){
     	printf("Error al abrir el fichero\n");
 
     }else{
-
-		while (fgets(linea, 50, f)) {
-		
-		clear_if_needed(linea);
-		
-		if (counter % 2 != 0){
-			sscanf(linea, "%[^\n]", &leer);
-			if (strcmp(leer, cl->usuario) == 0)
-				aux = 1;
-		}
-
-		if (aux==1){
-			counter++;
-			if (counter % 2 == 0){
-				sscanf(linea, "%[^\n]", &leer);
-				if (strcmp(leer, cl->password) == 0)
-					comp = 1;
+		while (fgets(linea, 20, f)) {
+			
+			if(opc == 1){ //LOG IN
+				clear_if_needed(linea);
+				if (counter % 2 != 0){
+					sscanf(linea, "%s", &leer);
+					if (strcmp(leer, cl->usuario) == 0)
+						aux = 1;
+				}
+				if (aux==1){
+					counter++;
+					clear_if_needed(linea);
+					if (counter % 2 == 0){
+						sscanf(linea, "%s", &leer);
+						if (strcmp(leer,cl->password) == 0)
+							comp = 1;
+					}
+				}
+			
+			} else if(opc == 2){ //NUEVO CLIENTE
+				
+				if (counter % 2 != 0){
+					sscanf(linea, "%s", &leer);
+					if (strcmp(leer, cl->usuario) == 0){
+						comp = 1;
+					}
+				}
 			}
-		}
-		counter++;
+			counter++;
 		}
 	}
 
 	//cerrar fichero
 	fclose(f);
-
 	return comp;
 }
