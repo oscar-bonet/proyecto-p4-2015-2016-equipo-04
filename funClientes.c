@@ -69,8 +69,7 @@ void menuComprarLibro(){
 				break;
 		case 3: menuComprarLibro();
 				break;
-		case 4: menuCliente(); //volvemos al anterior menu
-				break;
+		case 4: break;
 		default: error();
 	}
 

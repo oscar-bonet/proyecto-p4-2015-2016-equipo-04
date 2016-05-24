@@ -10,7 +10,7 @@
 int main(int argc, char *argv[]){
 
 	int opcAdmin=0;
-	int opcCliente=0;
+	int opcCliente=-1;
 	int opcAnCl=0;
 	int opc = 0;
 	Cliente *cl;
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]){
 
 		
 		opcCliente=menuCliente();
-		if(opcCliente != 0){
+		if(opcCliente != -1){
 			do{
 				switch(opcCliente){
 
@@ -140,31 +140,3 @@ int main(int argc, char *argv[]){
 		
 	}
 }
-
-
-/*
-do{
-			opc = menuLogin();
-
-			switch(opc){
-
-				case 1: opcCliente = menuCliente();
-						break;
-				case 2: cl = (Cliente*) malloc (sizeof(Cliente));
-						printf("Nombre de usuario: ");
-							fgets(str, 20, stdin);
-							clear_if_needed(str);
-							sscanf(str, "%s", cl->usuario);
-						printf("Password: ");
-							fgets(str, 20, stdin);
-							clear_if_needed(str);
-							sscanf(str, "%s", cl->password);
-						writeCl(cl);
-						free(cl);
-						cl=0;
-						//HE QUITADO UNA LLAMADA A MAIN
-						break;
-				default: error(); break;
-			}
-		} while((opc < 0) && (opc > 4));
-*/

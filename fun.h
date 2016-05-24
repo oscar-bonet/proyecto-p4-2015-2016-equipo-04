@@ -1,6 +1,10 @@
 #ifndef _FUN_H_
 #define _FUN_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct{
 	char isbn[20];
 	char titulo[40];
@@ -23,6 +27,8 @@ void error();
 
 void readLib();
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif
