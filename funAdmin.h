@@ -12,6 +12,7 @@ int menuLoginAdmin();
 int menuAdmin();
 void readCl();
 void anyadirLibro ();
+void modificarLibro();
 void writeLib(Libro* lib);
 
 #ifdef __cplusplus

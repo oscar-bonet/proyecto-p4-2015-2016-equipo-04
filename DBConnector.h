@@ -22,20 +22,17 @@ public:
 
 		int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 		if (result != SQLITE_OK) {
-			printf("Error preparing statement (SELECT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << " Error preparando sentencia (SELECT)" << endl;
+			cout << sqlite3_errmsg(db) << endl;
 			return result;
 		}
-
-		printf("SQL query prepared (SELECT)\n");
+		cout << "SQL query preparada (SELECT)" << endl;
 
 		Libro *lib;
 	//	int id;
 	//	char name[100];
-
-		printf("\n");
-		printf("\n");
-		printf("Mostrando Libros:\n");
+		cout << endl;
+		cout << "Mostrando Libros" << endl;
 		do {
 			result = sqlite3_step(stmt) ; //cojo el resultado
 			if (result == SQLITE_ROW) {
@@ -51,31 +48,22 @@ public:
 				strcpy(lib->anyo, (char *) sqlite3_column_text(stmt, 6));
 				strcpy(lib->editorial, (char *) sqlite3_column_text(stmt, 7));
 	//			printf("ID: %d Name: %s\n", id, name);
-				printf("\tISBN: %s\n", lib->isbn);
-				printf("\tTITULO: %s\n", lib->titulo);
-				printf("\tAUTOR: %s\n", lib->autor);
-				printf("\tGENERO: %s\n", lib->genero);
-				printf("\tPRECIO: %.2f\n", lib->precio);
-				printf("\tDESCRIPCION: %s\n", lib->desc);
-				printf("\tANYO: %s\n", lib->anyo);
-				printf("\tEDITORIAL: %s\n", lib->editorial);
 			}
 		} while (result == SQLITE_ROW);  //cuando no sea ROW quiere decir que ya no hay más
 
-		printf("\n");
-		printf("\n");
+		cout << endl;
 
 		result = sqlite3_finalize(stmt);
 		if (result != SQLITE_OK) {
-			printf("Error finalizing statement (SELECT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error finalizando sentencia (SELECT)" << endl;
+			cout << sqlite3_errmsg(db) << endl;
 			return result;
 		}
-
-		printf("Prepared statement finalized (SELECT)\n");
+		cout << "Sentencia finalizada (SELECT)" << endl;
 
 		return SQLITE_OK;
 	}
+
 	/*
 	int deleteAllCountry() {
 		sqlite3_stmt *stmt;
@@ -151,15 +139,15 @@ public:
 	int insertarLibro(Libros *lib) {
 		sqlite3_stmt *stmt;
 
-		char sql[] = "insert into Libros values (?, ?)";
+		char sql[] = "insert into Libros values (?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ; //el NULL significa que no le hemos puesto ningun valor a id
 		if (result != SQLITE_OK) {
-			printf("Error preparing statement (INSERT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error preparando sentencia (INSERT)" << endl;
+			cout << sqlite3_errmsg(db) << endl;
 			return result;
 		}
 
-		printf("SQL query prepared (INSERT)\n");
+		cout << "SQL query preparada (INSERT)" << endl;
 /*
 		result = sqlite3_bind_int(stmt, 1, id);
 		if (result != SQLITE_OK) {
@@ -179,29 +167,33 @@ public:
 
 		result = sqlite3_bind_text(stmt, 1, lib->isbn.c_str(), lib->isbn.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 2, lib->titulo.c_str(), lib->titulo.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 3, lib->autor.c_str(), lib->autor.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 4, lib->genero.c_str(), lib->genero.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
@@ -212,48 +204,51 @@ public:
 			return result;
 		}
 */
-		result = sqlite3_bind_text(stmt, 5, lib->precio.c_str(), lib->precio.length(), SQLITE_STATIC);
+		result = sqlite3_bind_double(stmt, 5, lib->precio);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+		//	printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 6, lib->desc.c_str(), lib->desc.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 7, lib->anyo.c_str(), lib->anyo.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_bind_text(stmt, 8, lib->editorial.c_str(), lib->editorial.length(), SQLITE_STATIC);
 		if (result != SQLITE_OK) {
-			printf("Error binding parameters\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error uniendo parametros" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+			//printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
 
 		result = sqlite3_step(stmt);
 		if (result != SQLITE_DONE) {
-			printf("Error inserting new data into Libros table\n");
+			cout << "Error insertando nuevos datos en tabla Libros" << endl;
 			return result;
 		}
 
 		result = sqlite3_finalize(stmt);
 		if (result != SQLITE_OK) {
-			printf("Error finalizing statement (INSERT)\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error finalizando sentencia (INSERT)" << endl;
+			cout << sqlite3_errmsg(db) << endl;
 			return result;
 		}
-
-		printf("Prepared statement finalized (INSERT)\n");
+		cout << "Sentencia finalizada (INSERT)" << endl;
 
 		return SQLITE_OK;
 	}
@@ -261,7 +256,7 @@ public:
 	DBConnector(std::string dbFile) { //en el constructor es donde iniciamos la BD
 		int result = sqlite3_open("Amazonas.sqlite", &db); //nombre de la BD, y le pasamos la dirección del puntero
 		if (result != SQLITE_OK) {
-			printf("Error opening database\n");
+			cout << "Error abriendo BD" << endl;
 
 		}
 	}
@@ -269,8 +264,8 @@ public:
 	~DBConnector() {
 		int result = sqlite3_close(db); //cerramos la base de datos, le pasamos el puntero
 		if (result != SQLITE_OK) {
-			printf("Error opening database\n");
-			printf("%s\n", sqlite3_errmsg(db));
+			cout << "Error abriendo BD" << endl;
+			cout << sqlite3_errmsg(db) << endl;
 		}	
 	}
 };

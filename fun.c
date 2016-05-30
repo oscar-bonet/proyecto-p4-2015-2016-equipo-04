@@ -28,7 +28,6 @@ void error(){
 */
 void readLib(){
 	FILE* f;
-    char c;
     char leer[100];
     char linea[100];
     int counter =1;
