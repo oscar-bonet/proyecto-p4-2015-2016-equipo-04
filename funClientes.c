@@ -35,7 +35,7 @@ int menuCliente(){
 	printf("\t5. Agregar fondos a la cuenta\n");
 	printf("\t6. Salir\n");
 	printf("Seleccione una opcion: ");
-
+clear_if_needed(str);
 	fgets(str, 2, stdin);
 	clear_if_needed(str);
 

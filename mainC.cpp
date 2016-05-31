@@ -3,6 +3,8 @@
 #include "funAdmin.h"
 #include "funClientes.h"
 #include <string.h>
+#include <cstring>
+#include <string>
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
@@ -13,7 +15,7 @@ int main(int argc, char *argv[]){
 
 	int opcAdmin=0;
 	int opcCliente=-1;
-	Cliente *cl;
+	Cliente cl;
 
 	//ES UN ERROR
 	if (argc>2) 
@@ -50,16 +52,20 @@ int main(int argc, char *argv[]){
 
 		int log = menuLogin();
 		int existe = 1;
+		string usu;
+		string cont;
 		
 		if (log == 1){ //cliente ya hecho
 
 			do{
 				cout << "Usuario: " << endl;
-					cin >> cl->usuario;
+					cin >> cl.usuario;
+				//	cin >> cl->usuario;
 
 				cout << "Password: " << endl;
-					cin >> cl->password;
-				existe = comparacion(cl, 1);	
+					cin >> cl.password;
+				//	cin >> cl->password;
+				existe = comparacion(&cl, 1);	
 
 				if (existe == 1){
 					cout << "Log in correcto." << endl;
@@ -76,19 +82,22 @@ int main(int argc, char *argv[]){
 			do{
 				cout << "NUEVO CLIENTE: " << endl;
 				cout << "\tUsuario: " << endl;
-					cin >> cl->usuario;
+					cin >> cl.usuario;
+				//	cin.getline(cl->usuario, 20);
+				//	cin >> cl->usuario;
 
 				cout << "\tPassword: " << endl;
-					cin >> cl->password;
+					cin >> cl.password;
+				//	cin >> cl->password;
 				
-				existe = comparacion(cl, 2);	
+				existe = comparacion(&cl, 2);	
 
 				if (existe == 1){
 					cout << "El usuario ya existe; por favor, cambia el nombre del usuario." << endl;
 				}
 
 				if (existe == 0){
-					writeCl(cl);
+					writeCl(&cl);
 					cout << "Usuario creado correctamente." << endl;
 				}
 
