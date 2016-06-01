@@ -35,10 +35,9 @@ int menuCliente(){
 	printf("\t5. Agregar fondos a la cuenta\n");
 	printf("\t6. Salir\n");
 	printf("Seleccione una opcion: ");
-clear_if_needed(str);
+	clear_if_needed(str);
 	fgets(str, 2, stdin);
 	clear_if_needed(str);
-
 	sscanf(str, "%d", &num);
 	printf("\n");
 
@@ -63,13 +62,12 @@ void menuComprarLibro(){
 
 	switch(num){
 		case 1: readLib();
-				menuComprarLibro();
+				//menuComprarLibro();
 				break;
 		case 2: menuComprarLibro();
 				break;
 		case 3: menuComprarLibro();
 				break;
-		case 4: break;
 		default: error();
 	}
 
