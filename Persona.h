@@ -10,11 +10,9 @@ class Persona{
 
 
 public:
-	Persona(string edad, int edad);
+	Persona(string nombre, int edad);
 	~Persona();
 	
 };
-
-
 
 #endif

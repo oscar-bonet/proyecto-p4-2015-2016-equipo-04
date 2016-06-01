@@ -45,7 +45,7 @@ int menuAdmin(){
 
 void modificarLibro(){
 	readLib();
-	int contador = 0;
+	int contador = 1;
 	int semaforo =0;
 	Libro *lib;
 	char str[50];
@@ -78,14 +78,14 @@ void modificarLibro(){
 			sscanf(linea, "%[^\n]", &leer);
 			if (strcmp(leer, isbn) == 0)
 				semaforo = 1;
-			if ((semaforo== 1) && (contador%4 ==0) )
+			if ((semaforo== 1) && (contador % 5 == 0) )
 			{
 				fprintf(f, "%s\n", precio);
 				semaforo = 0;
 			}
 			contador++;
-			if(contador == 8)
-				contador = 0;
+			if(contador == 9)
+				contador = 1;
 		}
 	}
 
