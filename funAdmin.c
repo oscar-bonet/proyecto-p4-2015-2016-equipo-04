@@ -36,7 +36,6 @@ int menuAdmin(){
 
 	fgets(str, 2, stdin);
 	clear_if_needed(str);
-
 	sscanf(str, "%d", &num);
 	printf("\n");
 

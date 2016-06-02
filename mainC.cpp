@@ -110,7 +110,7 @@ int main(int argc, char *argv[]){
 			do{
 				switch(opcCliente){
 
-					case 1: menuComprarLibro();
+					case 1: readLib();
 							opcCliente = menuCliente();
 							break;
 					case 2: opcCliente = menuCliente();
@@ -129,3 +129,4 @@ int main(int argc, char *argv[]){
 		
 	}
 }
+
