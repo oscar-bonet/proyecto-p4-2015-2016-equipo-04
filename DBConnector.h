@@ -210,7 +210,46 @@ public:
 		}
 		cout << "Sentencia finalizada (INSERT)"<< endl;
 
-	    delete lib;
+	    delete[] lib;
 	    return SQLITE_OK;
 	}
+
+
+	int borrarLibro(sqlite3 *db, string isbn) {
+	sqlite3_stmt *stmt;
+
+	string sqls = "delete from Libro where isbn='"+isbn+"'";
+	cout << sqls << endl;
+	char sql [200];
+	for (int i = 0; i <= sqls.size(); i++){
+		sql[i] = sqls[i];
+	}
+	cout << sql << endl;
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		cout << "Error preparing statement (DELETE)"<< endl;
+		cout<< sqlite3_errmsg(db)<<endl;
+		return result;
+	}
+
+	cout <<"SQL query prepared (DELETE)"<< endl;
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		cout<< "Error deleting data"<<endl;
+		cout<< sqlite3_errmsg(db) <<endl;
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		cout<<"Error finalizing statement (DELETE)"<< endl;
+		cout<< sqlite3_errmsg(db)<< endl;
+		return result;
+	}
+
+	cout<<"Prepared statement finalized (DELETE)"<<endl;
+
+	return SQLITE_OK;
+}
 };

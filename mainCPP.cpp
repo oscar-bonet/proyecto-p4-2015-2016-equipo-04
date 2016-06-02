@@ -30,6 +30,7 @@ int main(){
 	cout << "BASE DE DATOS: " << endl;
 	cout << "\t1. Anyadir ultimo libro a la base de datos" << endl;
 	cout << "\t2. Mostrar libros de la base de datos" << endl;
+	cout << "\t3. Eliminar un libro de la base de datos" << endl;
 	cout << "\tx. Salir" << endl;
 	cout << "Seleccione una opcion: " << endl;
 	cin >> opc;
