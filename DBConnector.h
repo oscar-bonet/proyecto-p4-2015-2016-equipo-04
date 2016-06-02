@@ -136,26 +136,6 @@ public:
 		}
 		fclose(fi);
 
-	//HEMOS LEIDO LOS ATRIBUTOS DEL LIBRO A GUARDAR, AHORA VAMOS A METERLO EN LA BD
-
-	/*	stringstream strm;
-		strm << "insert into libro values('" << lib->isbn << ",'" << lib->titulo << "','" << lib->autor << "','" << lib->genero
-			<< "','" << lib->precio << "','" << lib->desc << "','" << lib->anyo << "','" << lib->editorial << "')";
-
-		char *str = &s[0];
-		sqlite3_stmt * statement;
-		int result;
-		char *query = str;
-	    {
-	        if(sqlite3_prepare(dbfile,query,-1,&statement,0)==SQLITE_OK)
-	        {
-	            int res=sqlite3_step(statement);
-	            result=res;
-	            sqlite3_finalize(statement);
-	        }
-	        return result;
-	    }
-	*/
 	    sqlite3_stmt *stmt;
 
 		char sql[] = "insert into Libro (isbn, titulo, autor, genero, precio, desc, anyo, editorial) values (?, ?, ?, ?, ?, ?, ?, ?)";
