@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "DBConnector.h"
 #include "Autor.h"
+#include <string>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ int main(){
 						cout << "Error guardando libro!" << endl;
 						return result;
 					}
-				}
+		}
 				break;
 		case 2: {
 					int result = dbConnector.mostrarLibros(db); //para hacer una query
@@ -50,6 +51,25 @@ int main(){
 						cout << "Error obteniendo todos los libros!" << endl;
 						return result;
 					}
+		}
+				break;
+		case 3: {
+					int result = dbConnector.mostrarLibros(db); //para hacer una query
+					if (result != SQLITE_OK) {
+						cout << "Error obteniendo todos los libros!" << endl;
+						return result;
+					}
+					string isbn;
+					cout << "Introduce ISBN del libro a eliminar: ";
+					cin >> isbn;
+					cout << endl;
+					result = dbConnector.borrarLibro(db, isbn);
+					if (result != SQLITE_OK) {
+						cout << "Error borrando libro" << endl;
+						return result;
+					}
+
+
 				}
 				break;
 	}
