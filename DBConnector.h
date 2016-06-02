@@ -2,12 +2,22 @@
 #include "funAdmin.h"
 #include "funClientes.h"
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include "sqlite3.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 using namespace std;
+
+void clear_if_needed(char *str){
+	if (str[strlen(str) - 1] != '\n')
+	{
+		int c;
+    	while ( (c = getchar()) != EOF && c != '\n');
+    }
+}
 
 class DBConnector {
 
@@ -82,41 +92,41 @@ public:
 	int agregarLibro(sqlite3 *db){
 		int total;
 		std::ifstream f("libros.txt");
-		std::string line;
-		for (total = 1; std::getline(f, line); total++)
+		string line;
+		for (total = 0; getline(f, line); total++)
 		    ;
-
+		cout <<"Lineas totales: "<<total<<endl;
 	//HASTA AQUÍ DETECTAMOS CUANTAS FILAS HAY EN EL FICHERO PARA AHORA AGREGAR SOLO EL ÚLTIMO 
 
-		FILE* f;
+		FILE* fi;
 	    char leer[100];
 	    char linea[100];
 	    int counter =1;
 	    int cont = 0;
 	    int aux = 1;
-	    Libro *lib = (Libro*) malloc (sizeof(Libro));
+	    Libro *lib = new Libro();
 
-		f = fopen("libros.txt", "r");
+		fi = fopen("libros.txt", "r");
 
-	    if (f==NULL){
-	    	printf("Error al abrir el fichero\n");
+	    if (fi==NULL){
+	    	cout<<"Error al abrir el fichero" << endl;
 
 	    }else{
 			
-	    	while (fgets(linea, 100, f)) {
+	    	while (fgets(linea, 100, fi)) {
 	    		if (total-8 == cont)
 	    		{
 		    		clear_if_needed(linea);
 					sscanf(linea, "%[^\n]", &leer);
 					switch(aux){
-						case 1: lib->isbn = leer; break;
-						case 2: lib->titulo = leer; break;
-						case 3: lib->autor = leer; break;
-						case 4: lib->genero = leer; break;
-						case 5: lib->precio = leer; break;
-						case 6: lib->desc = leer; break;
-						case 7: lib->anyo = leer; break;
-						case 8: lib->editorial = leer; break;
+						case 1: strcpy(lib->isbn, leer); break;
+						case 2: strcpy(lib->titulo, leer); break;
+						case 3: strcpy(lib->autor, leer); break;
+						case 4: strcpy(lib->genero, leer); break;
+						case 5: strcpy(lib->precio, leer); break;
+						case 6: strcpy(lib->desc, leer); break;
+						case 7: strcpy(lib->anyo, leer); break;
+						case 8: strcpy(lib->editorial, leer); break;
 					}
 					aux++;
 					total++;
@@ -124,11 +134,11 @@ public:
 	    		
 			}
 		}
-		fclose(f);
+		fclose(fi);
 
 	//HEMOS LEIDO LOS ATRIBUTOS DEL LIBRO A GUARDAR, AHORA VAMOS A METERLO EN LA BD
 
-		std::stringstream strm;
+	/*	stringstream strm;
 		strm << "insert into libro values('" << lib->isbn << ",'" << lib->titulo << "','" << lib->autor << "','" << lib->genero
 			<< "','" << lib->precio << "','" << lib->desc << "','" << lib->anyo << "','" << lib->editorial << "')";
 
@@ -145,6 +155,82 @@ public:
 	        }
 	        return result;
 	    }
-	    return 0;
+	*/
+	    sqlite3_stmt *stmt;
+
+		char sql[] = "insert into Libro (isbn, titulo, autor, genero, precio, desc, anyo, editorial) values (?, ?, ?, ?, ?, ?, ?, ?)";
+		int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (INSERT)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+		cout <<"INSERT preparada"<< endl;
+
+		result = sqlite3_bind_text(stmt, 1, lib->isbn, strlen(lib->isbn), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 2, lib->titulo, strlen(lib->titulo), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 3, lib->autor, strlen(lib->autor), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 4, lib->genero, strlen(lib->genero), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 5, lib->precio, strlen(lib->precio), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 6, lib->desc, strlen(lib->desc), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 7, lib->anyo, strlen(lib->anyo), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+		result = sqlite3_bind_text(stmt, 8, lib->editorial, strlen(lib->editorial), SQLITE_STATIC);
+		if (result != SQLITE_OK) {
+			cout <<"Error preparando parametros"<< endl;
+			cout << sqlite3_errmsg(db) <<endl;
+			return result;
+		}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			cout<<"Error insertando nuevos datos a la tablas"<< endl;
+			return result;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			cout << "Error finalizando sentencia (INSERT)"<< endl;
+			cout << sqlite3_errmsg(db)<< endl;
+			return result;
+		}
+		cout << "Sentencia finalizada (INSERT)"<< endl;
+
+	    delete lib;
+	    return SQLITE_OK;
 	}
 };
