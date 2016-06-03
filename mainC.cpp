@@ -79,11 +79,12 @@ int main(int argc, char *argv[]){
 			
 			do{
 				cout << "NUEVO CLIENTE: " << endl;
-				cout << "\tUsuario: " << endl;
-					cin >> cl.usuario;
-
-				cout << "\tPassword: " << endl;
-					cin >> cl.password;
+				cout << "\tUsuario: ";
+				cin >> cl.usuario;
+				cout << endl;
+				cout << "\tPassword: ";
+				cin >> cl.password;
+				cout << endl;
 				
 				existe = comparacion(&cl, 2);	
 
