@@ -9,6 +9,7 @@ extern "C" {
 
 int menuLogin();
 
+void agregarDeseos(char* usuario);
 int menuCliente();
 void menuComprarLibro();
 
