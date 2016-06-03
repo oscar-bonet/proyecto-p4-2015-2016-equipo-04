@@ -43,9 +43,9 @@ int menuAdmin(){
 }
 
 void modificarLibro(){
-	/*readLib();
+	readLib();
 	int contador = 1;
-	//int semaforo =0;
+	int semaforo =0;
 	//Libro *lib;
 	char str[50];
 	char precio[10];
@@ -66,55 +66,41 @@ void modificarLibro(){
 
 	// HASTA AQUI VA BIEN, RECOGE BIEN LOS DATOS
 	
-	FILE* f1, f2;
+	FILE* f1;
+	FILE* f2;
     char leer[100];
     char linea[100];
-    int change_line;
-    int lines=0;
-    int line=1;
-    char ch[100];
 
 	f1 = fopen("libros.txt", "r");
-	ch = getc(f1);
-    if (f==NULL){
+	f2 = fopen("replica.txt", "a");
+
+
+    if (f1==NULL){
     	printf("Error al abrir el fichero\n");
-    
+
     }else{
-		while (ch!=EOF){
-			lines++;
-			if (strcmp(ch, isbn) == 0){
-				line = lines;
+		
+    	while (fgets(linea, 100, f1)) {
+    		clear_if_needed(linea);
+			sscanf(linea, "%[^\n]", &leer);
+			if (strcmp(leer, isbn) == 0)
+				semaforo = 1;
+			if ((semaforo== 1) && (contador % 5 == 0)){
+				fprintf(f2, "%s\n", precio);
+				semaforo = 0;
+			}else{
+				fprintf(f2, "%s\n", leer);
 			}
+			contador++;
+			if(contador == 9)
+				contador = 1;
 		}
-		printf("total lineas del f1 %d\n", lines);
-		//rewind
-		//rewind(f1);
-		change_line = line +4;
-
-		//open new file in write mode
-		f2 = fopen("replica.txt", "w");
-		ch = getc(f1);
-		while(ch != EOF){
-			ch = getc(f1);
-
-			if (ch == '\n'){
-				line++;
-				//except the line to be change
-				if(line!=change_line){
-					//copy all lines in file replica.c
-					putc(ch, f2);
-				}else{
-					putc(precio, f2);
-				}
-			}
-		}
-
 	}
 
 	fclose(f1);
 	fclose(f2);
 	remove("libros.txt");
-	rename("replica.txt", "libros.txt");*/
+	rename("replica.txt", "libros.txt");
 }
  
 

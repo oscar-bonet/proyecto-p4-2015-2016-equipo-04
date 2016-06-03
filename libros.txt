@@ -2,7 +2,7 @@
 La caida de los gigantes
 Ken Follet
 historica
-29
+25
 Primera guerra mundial
 2015
 plaza janes
@@ -26,7 +26,7 @@ alamut
 la colmena
 camilo juan cela
 accion
-29.99
+30.05
 vision de barcelona de los anyos 40
 1965
 catedra
