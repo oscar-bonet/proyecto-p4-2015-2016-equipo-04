@@ -30,8 +30,45 @@ void menuCliente(){
 	printf("\t1. Ver libros\n");
 	printf("\t2. Agregar a la lista de deseos\n");
 	printf("\t3. Ver lista de deseos\n");
-	printf("\t4. Salir\n");
+	printf("\t4. Comprar\n");
+	printf("\t5. Salir\n");
 	printf("Seleccione una opcion: ");
+}
+
+void compras(char* usuario){
+		readLib();
+	printf("Libro a comprar:\n");
+	char isbn[20];
+	printf("Seleccione un ISBN deseado: ");
+	clear_if_needed(isbn);
+	fgets(isbn, 20, stdin);
+	sscanf(isbn, "%s", isbn);
+	printf("\n");
+
+	FILE* f;
+        int c;
+
+	f = fopen("compras.txt", "a");
+
+	fprintf(f, "%s\n", usuario);
+	fprintf(f, "%s\n", isbn);
+
+	//cerrar fichero
+	fclose(f);
+
+}
+
+void writeCl(Cliente* cl){
+	FILE* f;
+        int c;
+
+	f = fopen("clientes.txt", "a");
+
+	fprintf(f, "%s\n", cl->usuario);
+	fprintf(f, "%s\n", cl->password);
+
+	//cerrar fichero
+	fclose(f);
 }
 
 void agregarDeseos(char* usuario){
@@ -57,20 +94,6 @@ void agregarDeseos(char* usuario){
 	fclose(f);
 
 }
-
-void writeCl(Cliente* cl){
-	FILE* f;
-        int c;
-
-	f = fopen("clientes.txt", "a");
-
-	fprintf(f, "%s\n", cl->usuario);
-	fprintf(f, "%s\n", cl->password);
-
-	//cerrar fichero
-	fclose(f);
-}
-
 
 void verCarrito(char* usuario){
 		FILE* f;

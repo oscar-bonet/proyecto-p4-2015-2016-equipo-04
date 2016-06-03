@@ -113,12 +113,14 @@ int main(int argc, char *argv[]){
 							break;
 					case 3:	verCarrito(cl.usuario);
 							break;
-					case 4: break; //salimos de la aplicacion
+					case 4: compras(cl.usuario);
+							break;
+					case 5: break; //salimos de la aplicacion
 					default: error();
 				}
 				menuCliente();
 				cin >> opcCliente;
-			} while((opcCliente > 0) && (opcCliente < 4));
+			} while((opcCliente > 0) && (opcCliente < 5));
 		}
 		
 	}

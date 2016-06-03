@@ -15,7 +15,7 @@ void menuComprarLibro();
 void verCarrito(char* usuario);
 void writeCl(Cliente* cl);
 int comparacion(Cliente* cl, int opc);
-
+void compras(char* usuario);
 #ifdef __cplusplus
 }
 #endif
