@@ -39,7 +39,7 @@ void menuCliente(){
 void agregarDeseos(char* usuario){
 	
 	readLib();
-	printf("PARA MI LISTA DE DESEOS:\n");
+	printf("AGREGAR LIBRO A MI CARRITO\n");
 	char isbn[20];
 	printf("Seleccione un ISBN deseado: ");
 	clear_if_needed(isbn);
@@ -54,6 +54,41 @@ void agregarDeseos(char* usuario){
 
 	fprintf(f, "%s\n", usuario);
 	fprintf(f, "%s\n", isbn);
+
+	//cerrar fichero
+	fclose(f);
+
+}
+
+void verCarrito(char* usuario){
+		FILE* f;
+        char c;
+        char leer[50];
+	char linea[100];
+		int counter =1;
+		int semaforo=0;
+	//abrir fichero para lectura
+	f = fopen("deseos.txt", "r");
+
+    if (f==NULL){
+    	printf("Error al abrir el fichero\n");
+
+    }else{
+
+		while (fgets(linea, 50, f)) {
+		
+			clear_if_needed(linea);			
+			sscanf(linea, "%[^\n]", &leer);
+			if (strcmp(leer,usuario)==0)
+				semaforo=1;
+			if ((semaforo==1)&&(counter %2 == 0)){
+				sscanf(linea, "%[^\n]", &leer);
+				printf("ISBN: %s\n",leer);
+				semaforo = 0;
+			}
+			counter++;
+		}
+	}
 
 	//cerrar fichero
 	fclose(f);

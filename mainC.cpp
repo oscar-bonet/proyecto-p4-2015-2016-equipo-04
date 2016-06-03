@@ -60,11 +60,9 @@ int main(int argc, char *argv[]){
 			do{
 				cout << "Usuario: " << endl;
 					cin >> cl.usuario;
-				//	cin >> cl->usuario;
 
 				cout << "Password: " << endl;
 					cin >> cl.password;
-				//	cin >> cl->password;
 				existe = comparacion(&cl, 1);	
 
 				if (existe == 1){
@@ -83,13 +81,10 @@ int main(int argc, char *argv[]){
 				cout << "NUEVO CLIENTE: " << endl;
 				cout << "\tUsuario: " << endl;
 					cin >> cl.usuario;
-				//	cin.getline(cl->usuario, 20);
-				//	cin >> cl->usuario;
 
 				cout << "\tPassword: " << endl;
 					cin >> cl.password;
-				//	cin >> cl->password;
-				
+
 				existe = comparacion(&cl, 2);	
 
 				if (existe == 1){
@@ -104,34 +99,25 @@ int main(int argc, char *argv[]){
 			}while (existe == 1);
 
 		}
-		menuCliente();
-		cin >> opcCliente;
-
-		if(opcCliente != -1){
-			do{
-
-				switch(opcCliente){
-
-					case 1: readLib();
-							//opcCliente = menuCliente();
-							break;
-					case 2: //opcCliente = menuCliente();
-							break;
-					case 3:	agregarDeseos(cl.usuario);
-							//opcCliente = menuCliente();
-							break;
-					case 4: //opcCliente = menuCliente();
-							break;
-					case 5: //opcCliente = menuCliente();
-							break;
-					case 6: break; //salimos de la aplicacion
-					default: error();
-				}
-				menuCliente();
-				cin >> opcCliente;
-			} while((opcCliente > 0) && (opcCliente < 6));
-		}
 		
+		do{
+			menuCliente();
+			cin >> opcCliente;
+			switch(opcCliente){
+
+				case 1: readLib();
+						break;
+				case 2: agregarDeseos(cl.usuario);
+						break;
+				case 3:	verCarrito(cl.usuario);
+						break;
+				case 4: break;
+				case 5: break;
+				case 6: break; //salimos de la aplicacion
+				default: error();
+			}
+			
+		} while((opcCliente > 0) && (opcCliente < 6));		
 	}
 }
 

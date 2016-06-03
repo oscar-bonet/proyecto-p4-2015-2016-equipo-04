@@ -12,7 +12,7 @@ int menuLogin();
 void agregarDeseos(char* usuario);
 void menuCliente();
 void menuComprarLibro();
-
+void verCarrito(char* usuario);
 void writeCl(Cliente* cl);
 int comparacion(Cliente* cl, int opc);
 
