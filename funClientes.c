@@ -42,6 +42,30 @@ int menuCliente(){
 	return num;
 }
 
+void agregarDeseos(char* usuario){
+	
+	readLib();
+	printf("PARA MI LISTA DE DESEOS:\n");
+	char isbn[20];
+	printf("Seleccione un ISBN deseado: ");
+	clear_if_needed(isbn);
+	fgets(isbn, 20, stdin);
+	sscanf(isbn, "%s", isbn);
+	printf("\n");
+
+	FILE* f;
+        int c;
+
+	f = fopen("deseos.txt", "a");
+
+	fprintf(f, "%s\n", usuario);
+	fprintf(f, "%s\n", isbn);
+
+	//cerrar fichero
+	fclose(f);
+
+}
+
 void writeCl(Cliente* cl){
 	FILE* f;
         int c;

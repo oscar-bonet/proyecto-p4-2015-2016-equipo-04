@@ -115,7 +115,8 @@ int main(int argc, char *argv[]){
 							break;
 					case 2: opcCliente = menuCliente();
 							break;
-					case 3:	opcCliente = menuCliente();
+					case 3:	agregarDeseos(cl.usuario);
+							opcCliente = menuCliente();
 							break;
 					case 4: opcCliente = menuCliente();
 							break;
