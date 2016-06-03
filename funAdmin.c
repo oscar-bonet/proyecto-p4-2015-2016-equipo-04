@@ -43,10 +43,10 @@ int menuAdmin(){
 }
 
 void modificarLibro(){
-	readLib();
+	/*readLib();
 	int contador = 1;
-	int semaforo =0;
-	Libro *lib;
+	//int semaforo =0;
+	//Libro *lib;
 	char str[50];
 	char precio[10];
 	char isbn[20]; //guardamos el ISBN del libro que vamos a modificar.
@@ -54,42 +54,69 @@ void modificarLibro(){
 	printf("\nISBN del libro a Modificar: ");
 		fgets(str, 20, stdin);
 		clear_if_needed(str);
-		sscanf(str,"%[^\n]", isbn);
+		sscanf(str,"%s", isbn);
 
 	printf("\nNuevo precio: ");
 		fgets(str, 20, stdin);
 		clear_if_needed(str);
 		sscanf(str,"%s", precio);
 
-	FILE* f;
+	printf("ISBN del libro: %s\n", isbn);
+	printf("Precio: %s\n", precio);
+
+	// HASTA AQUI VA BIEN, RECOGE BIEN LOS DATOS
+	
+	FILE* f1, f2;
     char leer[100];
     char linea[100];
+    int change_line;
+    int lines=0;
+    int line=1;
+    char ch[100];
 
-	f = fopen("libros.txt", "r+");
-
+	f1 = fopen("libros.txt", "r");
+	ch = getc(f1);
     if (f==NULL){
     	printf("Error al abrir el fichero\n");
-
+    
     }else{
-		
-    	while (fgets(linea, 100, f)) {
-    		clear_if_needed(linea);
-			sscanf(linea, "%[^\n]", &leer);
-			if (strcmp(leer, isbn) == 0)
-				semaforo = 1;
-			if ((semaforo== 1) && (contador % 5 == 0) )
-			{
-				fprintf(f, "%s\n", precio);
-				semaforo = 0;
+		while (ch!=EOF){
+			lines++;
+			if (strcmp(ch, isbn) == 0){
+				line = lines;
 			}
-			contador++;
-			if(contador == 9)
-				contador = 1;
 		}
+		printf("total lineas del f1 %d\n", lines);
+		//rewind
+		//rewind(f1);
+		change_line = line +4;
+
+		//open new file in write mode
+		f2 = fopen("replica.txt", "w");
+		ch = getc(f1);
+		while(ch != EOF){
+			ch = getc(f1);
+
+			if (ch == '\n'){
+				line++;
+				//except the line to be change
+				if(line!=change_line){
+					//copy all lines in file replica.c
+					putc(ch, f2);
+				}else{
+					putc(precio, f2);
+				}
+			}
+		}
+
 	}
 
-	fclose(f);
+	fclose(f1);
+	fclose(f2);
+	remove("libros.txt");
+	rename("replica.txt", "libros.txt");*/
 }
+ 
 
 void anyadirLibro (){
 	Libro *lib;

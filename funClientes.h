@@ -10,7 +10,7 @@ extern "C" {
 int menuLogin();
 
 void agregarDeseos(char* usuario);
-int menuCliente();
+void menuCliente();
 void menuComprarLibro();
 
 void writeCl(Cliente* cl);

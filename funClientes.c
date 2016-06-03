@@ -23,7 +23,7 @@ int menuLogin(){
 }
 
 
-int menuCliente(){
+void menuCliente(){
 	char str[2];
 	int num;
 	printf("\nCLIENTES:\n");
@@ -34,12 +34,6 @@ int menuCliente(){
 	printf("\t5. Agregar fondos a la cuenta\n");
 	printf("\t6. Salir\n");
 	printf("Seleccione una opcion: ");
-	clear_if_needed(str);
-	fgets(str, 2, stdin);
-	//clear_if_needed(str);
-	sscanf(str, "%d", &num);
-	printf("\n");
-	return num;
 }
 
 void agregarDeseos(char* usuario){
