@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
 
 				cout << "\tPassword: " << endl;
 					cin >> cl.password;
-
+				
 				existe = comparacion(&cl, 2);	
 
 				if (existe == 1){
@@ -99,25 +99,28 @@ int main(int argc, char *argv[]){
 			}while (existe == 1);
 
 		}
-		
-		do{
-			menuCliente();
-			cin >> opcCliente;
-			switch(opcCliente){
+		menuCliente();
+		cin >> opcCliente;
 
-				case 1: readLib();
-						break;
-				case 2: agregarDeseos(cl.usuario);
-						break;
-				case 3:	verCarrito(cl.usuario);
-						break;
-				case 4: break;
-				case 5: break;
-				case 6: break; //salimos de la aplicacion
-				default: error();
-			}
-			
-		} while((opcCliente > 0) && (opcCliente < 6));		
+		if(opcCliente != -1){
+			do{
+
+				switch(opcCliente){
+
+					case 1: readLib();
+							break;
+					case 2: agregarDeseos(cl.usuario);
+							break;
+					case 3:	verCarrito(cl.usuario);
+							break;
+					case 4: break; //salimos de la aplicacion
+					default: error();
+				}
+				menuCliente();
+				cin >> opcCliente;
+			} while((opcCliente > 0) && (opcCliente < 4));
+		}
+		
 	}
 }
 

@@ -28,18 +28,16 @@ void menuCliente(){
 	int num;
 	printf("\nCLIENTES:\n");
 	printf("\t1. Ver libros\n");
-	printf("\t2. Ver la cesta\n");
-	printf("\t3. Lista de deseos\n");
-	printf("\t4. Modificar perfil\n");
-	printf("\t5. Agregar fondos a la cuenta\n");
-	printf("\t6. Salir\n");
+	printf("\t2. Agregar a la lista de deseos\n");
+	printf("\t3. Ver lista de deseos\n");
+	printf("\t4. Salir\n");
 	printf("Seleccione una opcion: ");
 }
 
 void agregarDeseos(char* usuario){
 	
 	readLib();
-	printf("AGREGAR LIBRO A MI CARRITO\n");
+	printf("PARA MI LISTA DE DESEOS:\n");
 	char isbn[20];
 	printf("Seleccione un ISBN deseado: ");
 	clear_if_needed(isbn);
@@ -60,6 +58,20 @@ void agregarDeseos(char* usuario){
 
 }
 
+void writeCl(Cliente* cl){
+	FILE* f;
+        int c;
+
+	f = fopen("clientes.txt", "a");
+
+	fprintf(f, "%s\n", cl->usuario);
+	fprintf(f, "%s\n", cl->password);
+
+	//cerrar fichero
+	fclose(f);
+}
+
+
 void verCarrito(char* usuario){
 		FILE* f;
         char c;
@@ -76,13 +88,12 @@ void verCarrito(char* usuario){
     }else{
 
 		while (fgets(linea, 50, f)) {
-		
 			clear_if_needed(linea);			
 			sscanf(linea, "%[^\n]", &leer);
 			if (strcmp(leer,usuario)==0)
 				semaforo=1;
-			if ((semaforo==1)&&(counter %2 == 0)){
-				sscanf(linea, "%[^\n]", &leer);
+			if ((semaforo==1)&&(counter % 2 == 0)){
+				//sscanf(linea, "%[^\n]", &leer);
 				printf("ISBN: %s\n",leer);
 				semaforo = 0;
 			}
@@ -94,20 +105,6 @@ void verCarrito(char* usuario){
 	fclose(f);
 
 }
-
-void writeCl(Cliente* cl){
-	FILE* f;
-        int c;
-
-	f = fopen("clientes.txt", "a");
-
-	fprintf(f, "%s\n", cl->usuario);
-	fprintf(f, "%s\n", cl->password);
-
-	//cerrar fichero
-	fclose(f);
-}
-
 int comparacion (Cliente* cl, int opc){
 	FILE* f;
     char c;
