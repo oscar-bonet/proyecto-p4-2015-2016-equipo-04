@@ -105,28 +105,26 @@ int main(int argc, char *argv[]){
 
 		}
 
-		opcCliente=menuCliente();
-		if(opcCliente != -1){
-			do{
-				switch(opcCliente){
+		
+		
+		
+		do{	
+			opcCliente=menuCliente();
+			cout << "primer valor: "<< opcCliente << endl;
+			switch(opcCliente){
 
-					case 1: readLib();
-							opcCliente = menuCliente();
-							break;
-					case 2: opcCliente = menuCliente();
-							break;
-					case 3:	agregarDeseos(cl.usuario);
-							opcCliente = menuCliente();
-							break;
-					case 4: opcCliente = menuCliente();
-							break;
-					case 5: opcCliente = menuCliente();
-							break;
-					case 6: break; //salimos de la aplicacion
-					default: error();
-				}
-			} while((opcCliente > 0) && (opcCliente < 6));
-		}
+				case 1: readLib();
+						break;
+				case 2: break;
+				case 3:	agregarDeseos(cl.usuario);
+						break;
+				case 4: break;
+				case 5: break;
+				case 6: break; //salimos de la aplicacion
+				default: error();
+			}
+			cout << "valor final: "<<opcCliente << endl;
+		} while((opcCliente > 0) && (opcCliente < 6));
 		
 	}
 }
